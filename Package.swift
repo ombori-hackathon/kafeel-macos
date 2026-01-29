@@ -4,10 +4,24 @@ import PackageDescription
 let package = Package(
     name: "KafeelClient",
     platforms: [.macOS(.v14)],
+    products: [
+        .executable(name: "KafeelClient", targets: ["KafeelClient"]),
+        .library(name: "KafeelCore", targets: ["KafeelCore"])
+    ],
     targets: [
+        .target(
+            name: "KafeelCore",
+            path: "Sources/Core"
+        ),
         .executableTarget(
             name: "KafeelClient",
-            path: "Sources"
+            dependencies: ["KafeelCore"],
+            path: "Sources/App"
         ),
+        .testTarget(
+            name: "KafeelClientTests",
+            dependencies: ["KafeelCore"],
+            path: "Tests"
+        )
     ]
 )
