@@ -105,21 +105,37 @@ Chart(data, id: \.id) { item in
 }
 ```
 
-### App Icons
+### App Icons & Distribution
 App icon assets generated programmatically:
 - **SwiftUI Views**: `Sources/App/Assets/AppIconView.swift`
   - `AppIconView(size:)` - Full-color gradient icon with bar chart
   - `MenuBarIconView(size:)` - Monochrome template for menu bar
-- **PNG Set**: `AppIcon.appiconset/` - All macOS sizes (16x16 to 1024x1024)
-- **macOS Bundle**: `Kafeel.icns` - Ready for .app bundles
-- **Generator**: `generate_icons.py` - Regenerate icons anytime
+- **PNG Set**: `Resources/AppIcon.iconset/` - All macOS sizes (16x16 to 512x512@2x)
+- **macOS Bundle**: `Resources/AppIcon.icns` - Ready for .app bundles
+- **Distribution**: Complete build and packaging pipeline
 ```swift
 // Usage in code
 AppIconView(size: 32)  // Sidebar
 AppIconView(size: 128) // About screen
 MenuBarIconView(size: 18) // Menu bar
 ```
-See `README_ICONS.md` for complete documentation.
+
+**Distribution Commands:**
+```bash
+# Generate icons
+./scripts/generate-icons.sh
+
+# Build app bundle
+./scripts/build-app.sh
+
+# Create DMG installer
+./scripts/create-dmg.sh
+
+# Complete rebuild
+./scripts/generate-icons.sh && ./scripts/build-app.sh && ./scripts/create-dmg.sh
+```
+
+See `README_DISTRIBUTION.md` for complete documentation.
 
 ## Focus Score Algorithm
 ```

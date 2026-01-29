@@ -3,3 +3,8 @@
 .swiftpm/
 *.xcodeproj
 xcuserdata/
+
+# Build artifacts
+Kafeel.app/
+*.dmg
+.build/

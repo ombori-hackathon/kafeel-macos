@@ -193,7 +193,7 @@ struct KafeelApp: App {
         if CommandLine.arguments.count > 2 {
             outputPath = CommandLine.arguments[2]
         } else {
-            outputPath = "./AppIcon.appiconset"
+            outputPath = "./Resources/AppIcon.iconset"
         }
 
         let outputURL = URL(fileURLWithPath: outputPath)
@@ -205,14 +205,10 @@ struct KafeelApp: App {
             // Generate icons
             try IconGenerator.generateAppIcons(outputDirectory: outputURL)
 
-            // Generate Contents.json
-            try generateContentsJSON(at: outputURL)
-
             print("\nSuccess! Icons generated at: \(outputURL.path)")
-            print("\nTo use these icons:")
-            print("1. Create an Xcode project or add Assets.xcassets to your project")
-            print("2. Copy the AppIcon.appiconset folder into Assets.xcassets/")
-            print("3. The icons will be automatically detected by Xcode")
+            print("\nNext steps:")
+            print("1. Run: iconutil -c icns Resources/AppIcon.iconset -o Resources/AppIcon.icns")
+            print("2. Run: ./scripts/build-app.sh to create Kafeel.app")
         } catch {
             print("Error generating icons: \(error)")
             exit(1)
